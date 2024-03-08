@@ -1,0 +1,22 @@
+const fs = require('fs');
+const { execSync } = require('child_process');
+
+// 指定生成的代码包数量和基础包名
+const packageCount = 5;
+const basePackageName = 'my-package';
+
+// 循环生成代码包
+for (let i = 1; i <= packageCount; i++) {
+  const packageName = `${basePackageName}-${i}`;
+  const packagePath = `./${packageName}`;
+
+  // 创建代码包文件夹
+  fs.mkdirSync(packagePath);
+
+  // 初始化npm包
+  execSync('npm init -y', { cwd: packagePath });
+
+  console.log(`Package ${packageName} generated successfully.`);
+}
+
+console.log('Batch generation completed.');
